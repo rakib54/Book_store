@@ -16,4 +16,4 @@ class BookstoreModel(models.Model):
     author = models.CharField(max_length=30)
     category = models.CharField(max_length=30, choices=CATEGORY)
     first_publish = models.DateTimeField(auto_now_add=True)
-    last_publish = models.DateTimeField()
+    last_publish = models.DateTimeField(auto_now=True)
