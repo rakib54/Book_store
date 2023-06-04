@@ -1,0 +1,12 @@
+{% extends "base.html"%}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<h3>This is from store book</h3>
+<div>
+  <form method="post">
+    {% csrf_token %}
+    {{form | crispy}}
+  </form>
+</div>
+{% endblock %}
