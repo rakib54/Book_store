@@ -15,5 +15,7 @@ class BookstoreModel(models.Model):
     book_name = models.CharField(max_length=30)
     author = models.CharField(max_length=30)
     category = models.CharField(max_length=30, choices=CATEGORY)
-    first_publish = models.DateTimeField(auto_now_add=True)
-    last_publish = models.DateTimeField(auto_now=True)
+    first_publish = models.DateTimeField(
+        auto_now_add=True)  # Take first date and No change
+    last_publish = models.DateTimeField(
+        auto_now=True)  # it will change after Edit
