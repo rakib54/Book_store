@@ -1,6 +1,31 @@
 {% extends "base.html"%}
 {% block content %}
 
-<h3>This is from show book</h3>
-
+<h3 class="mb-2 text-center">Available Book List</h3>
+<div style="width: 80%; margin:auto" class="mt-5">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">Book Name</th>
+        <th scope="col">Author</th>
+        <th scope="col">Categories</th>
+        <th scope="col">First Publication</th>
+        <th scope="col">last Publication</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in books %}
+      <tr>
+        <th scope="row">{{item.id}}</th>
+        <td>{{item.book_name}}</td>
+        <td>{{item.author}}</td>
+        <td>{{item.category}}</td>
+        <td>{{item.first_publish}}</td>
+        <td>{{item.last_publish}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
 {% endblock %}
