@@ -3,6 +3,7 @@
 
 <h3 class="mb-2 text-center">Available Book List</h3>
 <div style="width: 80%; margin:auto" class="mt-5">
+  {% if books %}
   <table class="table table-striped">
     <thead>
       <tr>
@@ -12,6 +13,7 @@
         <th scope="col">Categories</th>
         <th scope="col">First Publication</th>
         <th scope="col">last Publication</th>
+        <th scope="col">Action</th>
       </tr>
     </thead>
     <tbody>
@@ -23,9 +25,14 @@
         <td>{{item.category}}</td>
         <td>{{item.first_publish}}</td>
         <td>{{item.last_publish}}</td>
+        <td><a href="{% url 'edit_books' id=item.id %}" class="btn btn-warning btn-sm">Edit</a> <a
+            href="{% url 'delete_books' id=item.id %}" class="btn btn-danger btn-sm">Delete</a></td>
       </tr>
       {% endfor %}
     </tbody>
   </table>
+  {% else %}
+  <h3 class="mb-2 text-center text-danger">No Books Available</h3>
+  {% endif %}
 </div>
 {% endblock %}
