@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from book.forms import BookStoreForm
 from book.models import BookstoreModel
 from django.views.generic import TemplateView, ListView, DetailView
+from django.views.generic.edit import FormView, CreateView
+from django.urls import reverse_lazy
+from django.http import HttpResponse
 
 # Create your views here.
 
@@ -20,17 +23,29 @@ class MyTemplateView(TemplateView):
         return context
 
 
-def store_book(request):
-    if (request.method == 'POST'):
-        book = BookStoreForm(request.POST)
-        if book.is_valid():
-            book.save()  # commit= False -> it won't save
-            print(book.cleaned_data)
-            return redirect('show_books')
+# def store_book(request):
+#     if (request.method == 'POST'):
+#         book = BookStoreForm(request.POST)
+#         if book.is_valid():
+#             book.save()  # commit= False -> it won't save
+#             print(book.cleaned_data)
+#             return redirect('show_books')
 
-    else:
-        book = BookStoreForm()
-    return render(request, 'store_book.html', {'form': book})
+#     else:
+#         book = BookStoreForm()
+#     return render(request, 'store_book.html', {'form': book})
+
+# class based store
+class BookFormView(CreateView):
+    model = BookstoreModel
+    template_name = 'store_book.html'
+    form_class = BookStoreForm
+    # success_url = reverse_lazy('show_books')
+
+    # def form_valid(self, form):
+    #     form.save()
+    #     print(form.cleaned_data)
+    #     return redirect("show_books")
 
 
 # def show_books(request):
