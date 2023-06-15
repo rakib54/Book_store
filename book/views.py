@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from book.forms import BookStoreForm
 from book.models import BookstoreModel
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView, DetailView
 
 # Create your views here.
 
@@ -33,10 +33,23 @@ def store_book(request):
     return render(request, 'store_book.html', {'form': book})
 
 
-def show_books(request):
-    books = BookstoreModel.objects.all()  # take all data from database
-    print('ALL books', books)
-    return render(request, 'show_book.html', {'books': books})
+# def show_books(request):
+#     books = BookstoreModel.objects.all()  # take all data from database
+#     print('ALL books', books)
+#     return render(request, 'show_book.html', {'books': books})
+
+# class Base view for show books
+class BookListView(ListView):
+    model = BookstoreModel
+    template_name = 'show_book.html'
+    context_object_name = 'books'
+
+
+class BookDetailView(DetailView):
+    model = BookstoreModel
+    template_name = 'book_details.html'
+    context_object_name = 'item'
+    pk_url_kwarg = 'id'
 
 
 def edit_book(request, id):
